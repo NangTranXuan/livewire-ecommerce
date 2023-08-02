@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use App\Models\Contact;
 use App\Models\Setting;
 use Livewire\Component;
+use Livewire\Livewire;
+
 
 class ContactComponent extends Component
 {
@@ -41,7 +43,9 @@ class ContactComponent extends Component
         $contact->phone = $this->phone;
         $contact->comment = $this->comment;
         $contact->save();
-        session()->flash('message', 'Thanks, Your message has been sent successfully!');
+        // session()->flash('message', 'Thanks, Your message has been sent successfully!');
+        flash()->addSuccess('Thanks, Your message has been sent successfully!');
+        return redirect('/');
     }
 
     public function render()
