@@ -23,13 +23,8 @@ class AdminEditProductComponent extends Component
 
     public $regular_price;
 
-    public $sale_price;
-
-    public $SKU;
-
     public $stock_status;
 
-    public $featured;
 
     public $quantity;
 
@@ -41,10 +36,6 @@ class AdminEditProductComponent extends Component
 
     public $product_id;
 
-    public $images;
-
-    public $newimages;
-
     public function mount($product_slug)
     {
         $product = Product::where('slug', $product_slug)->first();
@@ -53,13 +44,9 @@ class AdminEditProductComponent extends Component
         $this->short_description = $product->short_description;
         $this->description = $product->description;
         $this->regular_price = $product->regular_price;
-        $this->sale_price = $product->sale_price;
-        $this->SKU = $product->SKU;
         $this->stock_status = $product->stock_status;
-        $this->featured = $product->featured;
         $this->quantity = $product->quantity;
         $this->image = $product->image;
-        $this->images = explode(',', $product->images);
         $this->category_id = $product->category_id;
         $this->product_id = $product->id;
     }
@@ -77,8 +64,6 @@ class AdminEditProductComponent extends Component
             'short_description' => 'required',
             'description' => 'required',
             'regular_price' => 'required|numeric',
-            'sale_price' => 'numeric',
-            'SKU' => 'required',
             'stock_status' => 'required',
             'quantity' => 'required|numeric',
             'category_id' => 'required',
@@ -98,8 +83,6 @@ class AdminEditProductComponent extends Component
             'short_description' => 'required',
             'description' => 'required',
             'regular_price' => 'required|numeric',
-            'sale_price' => 'numeric',
-            'SKU' => 'required',
             'stock_status' => 'required',
             'quantity' => 'required|numeric',
             'category_id' => 'required',
@@ -115,40 +98,20 @@ class AdminEditProductComponent extends Component
         $product->short_description = $this->short_description;
         $product->description = $this->description;
         $product->regular_price = $this->regular_price;
-        $product->sale_price = $this->sale_price;
-        $product->SKU = $this->SKU;
         $product->stock_status = $this->stock_status;
-        $product->featured = $this->featured;
         $product->quantity = $this->quantity;
 
         if ($this->newimage) {
-            unlink('assets/images/products'.'/'.$product->image);
-            $imageName = Carbon::now()->timestamp.'.'.$this->newimage->extension();
+            unlink('assets/images/products' . '/' . $product->image);
+            $imageName = Carbon::now()->timestamp . '.' . $this->newimage->extension();
             $this->newimage->storeAs('products', $imageName);
             $product->image = $imageName;
         }
 
-        if ($this->newimages) {
-            if ($product->images) {
-                $images = explode(',', $product->images);
-                foreach ($images as $image) {
-                    if ($image) {
-                        unlink('assets/images/products'.'/'.$image);
-                    }
-                }
-            }
-            $imagesname = '';
-            foreach ($this->newimages as $key => $image) {
-                $imgName = Carbon::now()->timestamp.$key.'.'.$image->extension();
-                $image->storeAs('products', $imgName);
-                $imagesname = $imagesname.','.$imgName;
-            }
-            $product->images = $imagesname;
-        }
-
         $product->category_id = $this->category_id;
         $product->save();
-        session()->flash('message', 'Product has been updated successfully!');
+        flash()->addSuccess('Product has been updated successfully!');
+        return redirect()->route('admin.products');
     }
 
     public function render()

@@ -78,7 +78,7 @@ class AdminSettingComponent extends Component
         ]);
 
         $setting = Setting::find(1);
-        if (! $setting) {
+        if (!$setting) {
             $setting = new Setting();
         }
         $setting->email = $this->email;
@@ -92,7 +92,8 @@ class AdminSettingComponent extends Component
         $setting->instagram = $this->instagram;
         $setting->youtube = $this->youtube;
         $setting->save();
-        session()->flash('message', 'Settings has been saved successfully!');
+        flash()->addSuccess('Settings has been saved successfully!');
+        return redirect()->route('admin.settings');
     }
 
     public function render()

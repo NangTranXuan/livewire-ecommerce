@@ -49,7 +49,8 @@ class AdminEditCategoryComponent extends Component
         $category->name = $this->name;
         $category->slug = $this->slug;
         $category->save();
-        session()->flash('message', 'Category has been updated successfully!');
+        flash()->addSuccess('Category has been updated successfully!');
+        return redirect()->route('admin.categories');
     }
 
     public function render()

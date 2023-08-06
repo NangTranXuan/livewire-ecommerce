@@ -36,7 +36,8 @@ class AdminAddCategoryComponent extends Component
         $category->name = $this->name;
         $category->slug = $this->slug;
         $category->save();
-        session()->flash('message', 'Category has been created successfully!');
+        flash()->addSuccess('Category has been created successfully!');
+        return redirect()->route('admin.categories');
     }
 
     public function render()

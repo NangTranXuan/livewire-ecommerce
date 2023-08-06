@@ -18,7 +18,8 @@ class AdminOrderComponent extends Component
             $order->canceled_date = DB::raw('CURRENT_DATE');
         }
         $order->save();
-        session()->flash('order_message', 'Order status has been updated successfully!');
+        flash()->addSuccess('Order status has been updated successfully!');
+        return redirect()->route('admin.orders');
     }
 
     public function render()

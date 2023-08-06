@@ -23,13 +23,13 @@ class AdminAddProductComponent extends Component
 
     public $regular_price;
 
-    public $sale_price;
+    // public $sale_price;
 
-    public $SKU;
+    // public $SKU;
 
     public $stock_status;
 
-    public $featured;
+    // public $featured;
 
     public $quantity;
 
@@ -42,7 +42,7 @@ class AdminAddProductComponent extends Component
     public function mount()
     {
         $this->stock_status = 'instock';
-        $this->featured = 0;
+        // $this->featured = 0;
     }
 
     public function generateSlug()
@@ -58,8 +58,8 @@ class AdminAddProductComponent extends Component
             'short_description' => 'required',
             'description' => 'required',
             'regular_price' => 'required|numeric',
-            'sale_price' => 'numeric',
-            'SKU' => 'required',
+            // 'sale_price' => 'numeric',
+            // 'SKU' => 'required',
             'stock_status' => 'required',
             'quantity' => 'required|numeric',
             'image' => 'required|mimes:jpeg,png',
@@ -75,8 +75,8 @@ class AdminAddProductComponent extends Component
             'short_description' => 'required',
             'description' => 'required',
             'regular_price' => 'required|numeric',
-            'sale_price' => 'numeric',
-            'SKU' => 'required',
+            // 'sale_price' => 'numeric',
+            // 'SKU' => 'required',
             'stock_status' => 'required',
             'quantity' => 'required|numeric',
             'image' => 'required|mimes:jpeg,png',
@@ -89,28 +89,29 @@ class AdminAddProductComponent extends Component
         $product->short_description = $this->short_description;
         $product->description = $this->description;
         $product->regular_price = $this->regular_price;
-        $product->sale_price = $this->sale_price;
-        $product->SKU = $this->SKU;
+        // $product->sale_price = $this->sale_price;
+        // $product->SKU = $this->SKU;
         $product->stock_status = $this->stock_status;
-        $product->featured = $this->featured;
+        // $product->featured = $this->featured;
         $product->quantity = $this->quantity;
-        $imageName = Carbon::now()->timestamp.'.'.$this->image->extension();
+        $imageName = Carbon::now()->timestamp . '.' . $this->image->extension();
         $this->image->storeAs('products', $imageName);
         $product->image = $imageName;
 
         if ($this->images) {
             $imagesname = '';
             foreach ($this->images as $key => $image) {
-                $imgName = Carbon::now()->timestamp.$key.'.'.$image->extension();
+                $imgName = Carbon::now()->timestamp . $key . '.' . $image->extension();
                 $image->storeAs('products', $imgName);
-                $imagesname = $imagesname.','.$imgName;
+                $imagesname = $imagesname . ',' . $imgName;
             }
             $product->images = $imagesname;
         }
 
         $product->category_id = $this->category_id;
         $product->save();
-        session()->flash('message', 'Product has been created successfully!');
+        flash()->addSuccess('Product has been created successfully!');
+        return redirect()->route('admin.products');
     }
 
     public function render()

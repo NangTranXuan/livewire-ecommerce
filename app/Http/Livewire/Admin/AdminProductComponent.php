@@ -14,18 +14,19 @@ class AdminProductComponent extends Component
     {
         $product = Product::find($id);
         if ($product->image) {
-            unlink('assets/images/products'.'/'.$product->image);
+            unlink('assets/images/products' . '/' . $product->image);
         }
         if ($product->images) {
             $images = explode(',', $product->images);
             foreach ($images as $image) {
                 if ($image) {
-                    unlink('assets/images/products'.'/'.$image);
+                    unlink('assets/images/products' . '/' . $image);
                 }
             }
         }
         $product->delete();
-        session()->flash('message', 'Product has been deleted successfully!');
+        flash()->addSuccess('Product has been deleted successfully!');
+        return redirect()->route('admin.homecategories');
     }
 
     public function render()

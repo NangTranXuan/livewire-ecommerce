@@ -11,7 +11,8 @@ class AdminCouponsComponent extends Component
     {
         $coupon = Coupon::find($coupon_id);
         $coupon->delete();
-        session()->flash('message', 'Coupon has been deleted successfully!');
+        flash()->addSuccess('Coupon has been deleted successfully!');
+        return redirect()->route('admin.coupons');
     }
 
     public function render()

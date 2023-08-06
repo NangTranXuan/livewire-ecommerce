@@ -25,7 +25,8 @@ class AdminHomeCategoryComponent extends Component
         $category->sel_categories = implode(',', $this->selected_categories);
         $category->no_of_products = $this->numberofproducts;
         $category->save();
-        session()->flash('message', 'HomeCategory has been updated successfully!');
+        flash()->addSuccess('HomeCategory has been updated successfully!');
+        return redirect()->route('admin.products');
     }
 
     public function render()
