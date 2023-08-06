@@ -82,6 +82,46 @@
                                                     ({{ Auth::user()->name }})<i class="fa fa-angle-down"
                                                         aria-hidden="true"></i></a>
                                                 <ul class="submenu curency">
+                                                    <li class="menu-item home-icon">
+                                                        <a href="/" class="link-term mercado-item-title"><i
+                                                                class="fa fa-home" aria-hidden="true"></i></a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a title="Dashboard"
+                                                            href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                                    </li>
+
+                                                    <li class="menu-item">
+                                                        <a title="Categories"
+                                                            href="{{ route('admin.categories') }}">Categories</a>
+                                                    </li>
+
+                                                    <li class="menu-item">
+                                                        <a title="Products" href="{{ route('admin.products') }}">All
+                                                            Products</a>
+                                                    </li>
+
+                                                    <li class="menu-item">
+                                                        <a title="Manage Home Categories"
+                                                            href="{{ route('admin.homecategories') }}">Manage Home
+                                                            Categories</a>
+                                                    </li>
+
+                                                    <li class="menu-item">
+                                                        <a title="All Coupon" href="{{ route('admin.coupons') }}">All
+                                                            Coupon</a>
+                                                    </li>
+
+                                                    <li class="menu-item">
+                                                        <a title="All Orders" href="{{ route('admin.orders') }}">All
+                                                            Orders</a>
+                                                    </li>
+
+                                                    <li class="menu-item">
+                                                        <a title="Contact Messages"
+                                                            href="{{ route('admin.contact') }}">Contact
+                                                            Messages</a>
+                                                    </li>
                                                     <li class="menu-item">
                                                         <a title="Settings"
                                                             href="{{ route('admin.settings') }}">Settings</a>
@@ -91,7 +131,8 @@
                                                         <a href="{{ route('logout') }}"
                                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                                     </li>
-                                                    <form id="logout-form" method="POST" action="{{ route('logout') }}">
+                                                    <form id="logout-form" method="POST"
+                                                        action="{{ route('logout') }}">
                                                         @csrf
                                                     </form>
                                                 </ul>
@@ -144,143 +185,87 @@
 
                             @livewire('header-search-component')
 
-                            @if (Route::has('login'))
-                                @auth
-                                    <div class="wrap-icon right-section">
-                                        @if (Auth::user()->utype === 'ADM')
-                                        @else
-                                            @livewire('wishlist-count-component')
+                            <div class="wrap-icon right-section" id="wishlist-cart">
 
-                                            @livewire('cart-count-component')
-                                        @endif
+                                @livewire('wishlist-count-component')
 
-                                        <div class="wrap-icon-section show-up-after-1024">
-                                            <a href="#" class="mobile-navigation">
-                                                <span></span>
-                                                <span></span>
-                                                <span></span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                @endif
-                                @endif
-                            </div>
-                        </div>
+                                @livewire('cart-count-component')
 
-                        <div class="nav-section header-sticky">
-
-                            <div class="primary-nav-section">
-                                <div class="container">
-                                    @if (Route::has('login'))
-                                        @auth
-
-                                            @if (Auth::user()->utype === 'ADM')
-                                                <ul class="nav primary clone-main-menu" id="mercado_main"
-                                                    data-menuname="Main menu">
-                                                    <li class="menu-item home-icon">
-                                                        <a href="/" class="link-term mercado-item-title"><i
-                                                                class="fa fa-home" aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a title="Dashboard" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                                                    </li>
-
-                                                    <li class="menu-item">
-                                                        <a title="Categories"
-                                                            href="{{ route('admin.categories') }}">Categories</a>
-                                                    </li>
-
-                                                    <li class="menu-item">
-                                                        <a title="Products" href="{{ route('admin.products') }}">All
-                                                            Products</a>
-                                                    </li>
-
-                                                    <li class="menu-item">
-                                                        <a title="Manage Home Categories"
-                                                            href="{{ route('admin.homecategories') }}">Manage Home
-                                                            Categories</a>
-                                                    </li>
-
-                                                    <li class="menu-item">
-                                                        <a title="All Coupon" href="{{ route('admin.coupons') }}">All
-                                                            Coupon</a>
-                                                    </li>
-
-                                                    <li class="menu-item">
-                                                        <a title="All Orders" href="{{ route('admin.orders') }}">All
-                                                            Orders</a>
-                                                    </li>
-
-                                                    <li class="menu-item">
-                                                        <a title="Contact Messages" href="{{ route('admin.contact') }}">Contact
-                                                            Messages</a>
-                                                    </li>
-
-                                                </ul>
-                                            @else
-                                                <ul class="nav primary clone-main-menu" id="mercado_main"
-                                                    data-menuname="Main menu">
-                                                    <li class="menu-item home-icon">
-                                                        <a href="/" class="link-term mercado-item-title"><i
-                                                                class="fa fa-home" aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="#" class="link-term mercado-item-title">About Us</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="/shop" class="link-term mercado-item-title">Shop</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="/cart" class="link-term mercado-item-title">Cart</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="/checkout" class="link-term mercado-item-title">Checkout</a>
-                                                    </li>
-                                                    <li class="menu-item">
-                                                        <a href="/contact-us" class="link-term mercado-item-title">Contact Us</a>
-                                                    </li>
-
-                                                </ul>
-                                            @endif
-                                        @endif
-                                        @endif
-                                    </div>
+                                <div class="wrap-icon-section show-up-after-1024">
+                                    <a href="#" class="mobile-navigation">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </header>
 
-                {{ $slot }}
+                    <div class="nav-section header-sticky">
 
-                @livewire('footer-component')
+                        <div class="primary-nav-section">
+                            <div class="container">
 
-                <script src="{{ asset('assets/js/jquery-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
-                <script src="{{ asset('assets/js/jquery-ui-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
-                <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-                <script src="{{ asset('assets/js/jquery.flexslider.js') }}"></script>
-                <!-- <script src="{{ asset('assets/js/chosen.jquery.min.js') }}"></script> -->
-                <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-                <script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
-                <script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
-                <script src="{{ asset('assets/js/functions.js') }}"></script>
-                <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+                                <ul class="nav primary clone-main-menu" id="mercado_main" data-menuname="Main menu">
+                                    <li class="menu-item home-icon">
+                                        <a href="/" class="link-term mercado-item-title"><i class="fa fa-home"
+                                                aria-hidden="true"></i></a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#" class="link-term mercado-item-title">About Us</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="/shop" class="link-term mercado-item-title">Shop</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="/cart" class="link-term mercado-item-title">Cart</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="/checkout" class="link-term mercado-item-title">Checkout</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="/contact-us" class="link-term mercado-item-title">Contact Us</a>
+                                    </li>
 
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-                    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-                    crossorigin="anonymous"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"
-                    integrity="sha512-GDey37RZAxFkpFeJorEUwNoIbkTwsyC736KNSYucu1WJWFK9qTdzYub8ATxktr6Dwke7nbFaioypzbDOQykoRg=="
-                    crossorigin="anonymous"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.js"
-                    integrity="sha512-0Z2o7qmtl7ixxWcEQxxTCT8mX4PsdffSGoVJ7A80zqt6DvdEHF800xrsSmKPkSoUaHtlIhkLAhCPb/tkf78SCA=="
-                    crossorigin="anonymous"></script>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-                <script src="https://cdn.tiny.cloud/1/vijw5ga5y08xmy65y124qge7tkgtfi5pzn2ctqq23zdp0bqk/tinymce/5/tinymce.min.js"
-                    referrerpolicy="origin"></script>
-                @livewireScripts
+        {{ $slot }}
 
-                @stack('scripts')
-            </body>
+        @livewire('footer-component')
 
-            </html>
+        <script src="{{ asset('assets/js/jquery-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
+        <script src="{{ asset('assets/js/jquery-ui-1.12.4.minb8ff.js?ver=1.12.4') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.flexslider.js') }}"></script>
+        <!-- <script src="{{ asset('assets/js/chosen.jquery.min.js') }}"></script> -->
+        <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
+        <script src="{{ asset('assets/js/functions.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"
+            integrity="sha512-GDey37RZAxFkpFeJorEUwNoIbkTwsyC736KNSYucu1WJWFK9qTdzYub8ATxktr6Dwke7nbFaioypzbDOQykoRg=="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.js"
+            integrity="sha512-0Z2o7qmtl7ixxWcEQxxTCT8mX4PsdffSGoVJ7A80zqt6DvdEHF800xrsSmKPkSoUaHtlIhkLAhCPb/tkf78SCA=="
+            crossorigin="anonymous"></script>
+
+        <script src="https://cdn.tiny.cloud/1/vijw5ga5y08xmy65y124qge7tkgtfi5pzn2ctqq23zdp0bqk/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
+        @livewireScripts
+
+        @stack('scripts')
+    </body>
+
+    </html>

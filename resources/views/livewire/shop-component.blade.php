@@ -89,7 +89,7 @@
                         @endphp
 
                         @foreach ($products as $product)
-                            <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
+                            <li class="col-lg-4 ">
                                 <div class="product product-style-3 equal-elem ">
                                     <div class="product-thumnail">
                                         <a href="{{ route('product.details', ['slug' => $product->slug]) }}"
@@ -205,11 +205,11 @@
     <script>
         var slider = document.getElementById('slider');
         noUiSlider.create(slider, {
-            start: [1, 1000],
+            start: [1, 4000],
             connect: true,
             range: {
                 'min': 1,
-                'max': 1000
+                'max': 4000
             },
             pips: {
                 mode: 'steps',
