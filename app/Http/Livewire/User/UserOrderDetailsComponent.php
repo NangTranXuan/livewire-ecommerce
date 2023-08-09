@@ -22,7 +22,8 @@ class UserOrderDetailsComponent extends Component
         $order->status = 'canceled';
         $order->canceled_date = DB::raw('CURRENT_DATE');
         $order->save();
-        session()->flash('order_message', 'Order has been canceled!');
+        flash()->addSuccess('Order has been canceled!');
+        return redirect()->route('user.orders');
     }
 
     public function render()

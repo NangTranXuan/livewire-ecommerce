@@ -43,6 +43,8 @@ class ShopComponent extends Component
     {
         Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
         $this->emitTo('wishlist-count-component', 'refreshComponent');
+        flash()->addInfo('Item added in Wishlist');
+        return redirect()->back();
     }
 
     public function removeFromWishlist($product_id)

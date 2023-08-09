@@ -38,7 +38,7 @@
                         <div class="sort-item product-per-page">
                             <select name="post-per-page" class="use-chosen" wire:model="pagesize">
                                 <option value="12" selected="selected">12 per page</option>
-                                <option value="16">16 per page</option>
+                                <option value="15">15 per page</option>
                                 <option value="18">18 per page</option>
                                 <option value="21">21 per page</option>
                                 <option value="24">24 per page</option>

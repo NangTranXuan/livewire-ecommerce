@@ -45,7 +45,7 @@ class CartComponent extends Component
     {
         Cart::instance('cart')->remove($rowId);
         $this->emitTo('cart-count-component', 'refreshComponent');
-        session()->flash('success_message', 'Item has been removed');
+        flash()->addSuccess('Item has been removed');
     }
 
     //remove cart all product
@@ -62,7 +62,7 @@ class CartComponent extends Component
         Cart::instance('cart')->remove($rowId);
         Cart::instance('saveForLater')->add($item->id, $item->name, 1, $item->price)->associate('App\Models\Product');
         $this->emitTo('cart-count-component', 'refreshComponent');
-        session()->flash('success_message', 'Item has been saved for later');
+        flash()->addSuccess('Item has been saved for later');
     }
 
     //move to cart
@@ -72,14 +72,14 @@ class CartComponent extends Component
         Cart::instance('saveForLater')->remove($rowId);
         Cart::instance('cart')->add($item->id, $item->name, 1, $item->price)->associate('App\Models\Product');
         $this->emitTo('cart-count-component', 'refreshComponent');
-        session()->flash('s_success_message', 'Item has been moved to cart');
+        flash()->addSuccess('Item has been moved to cart');
     }
 
     //delete product from save for later
     public function deleteFromSaveForLater($rowId)
     {
         Cart::instance('saveForLater')->remove($rowId);
-        session()->flash('s_success_message', 'Item has been removed from save for later');
+        flash()->addSuccess('Item has been removed from save for later');
     }
 
     //Apply Coupon Code
@@ -87,7 +87,8 @@ class CartComponent extends Component
     {
         $coupon = Coupon::where('code', $this->couponCode)->where('expiry_date', '>=', Carbon::today())->where('cart_value', '<=', Cart::instance('cart')->subtotal())->first();
         if (!$coupon) {
-            session()->flash('coupon_message', 'Coupon code is invalid');
+            flash()->addSuccess('Coupon code is invalid');
+
 
             return;
         }

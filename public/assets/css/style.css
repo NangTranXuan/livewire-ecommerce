@@ -7395,3 +7395,6 @@ svg {
     margin-left: 5px;
 }
 
+.product .product-thumnail {
+    height: 35vh;
+}

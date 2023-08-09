@@ -42,7 +42,8 @@ class UserReviewComponent extends Component
         $orderItem = OrderItem::find($this->order_item_id);
         $orderItem->rstatus = true;
         $orderItem->save();
-        session()->flash('message', 'Your review has been added successfully!');
+        flash()->addSuccess('Your review has been added successfully!');
+        return redirect('/');
     }
 
     public function render()
